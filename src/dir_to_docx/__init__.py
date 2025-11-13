@@ -165,6 +165,18 @@ def main(input_dir: str, output_file: click.File, path_prefix: str, exclude: tup
     style.hidden = False
     style.quick_style = True
     style.locked = False
+    style = doc.styles.add_style("Class", style_type=WD_STYLE_TYPE.CHARACTER)
+    style.hidden = False
+    style.quick_style = True
+    style.locked = False
+    style = doc.styles.add_style("Function", style_type=WD_STYLE_TYPE.CHARACTER)
+    style.hidden = False
+    style.quick_style = True
+    style.locked = False
+    style = doc.styles.add_style("Constant", style_type=WD_STYLE_TYPE.CHARACTER)
+    style.hidden = False
+    style.quick_style = True
+    style.locked = False
     style = doc.styles.add_style("Keyword", style_type=WD_STYLE_TYPE.CHARACTER)
     style.hidden = False
     style.quick_style = True
@@ -228,6 +240,12 @@ def main(input_dir: str, output_file: click.File, path_prefix: str, exclude: tup
                                 paragraph.add_run(token[1], style="String")
                             elif token[0] in Token.Literal.Number:
                                 paragraph.add_run(token[1], style="Number")
+                            elif token[0] in Token.Name.Constant:
+                                paragraph.add_run(token[1], style="Constant")
+                            elif token[0] in Token.Name.Function:
+                                paragraph.add_run(token[1], style="Function")
+                            elif token[0] in Token.Name.Class:
+                                paragraph.add_run(token[1], style="Class")
                             elif token[0] in Token.Name:
                                 paragraph.add_run(token[1], style="Variable")
                             elif token[0] in Token.Keyword:
